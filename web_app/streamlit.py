@@ -17,8 +17,8 @@ option_map = {"count": 1,
               "amount": 2,
               "registration": 3}
 st.markdown(
-    '<style>.block-container{padding-top: 1.3em;padding-bottom: 2em;}</style>', unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center; margin-top:0; padding:0'>PhonePe Prediction</h1>",
+    '<style>.block-container{background-color:#6739B7;} header{background-color:#C7C3FD !important}  label{color:#FAFAFE !important}</style>', unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; margin-top:0; padding:0; color:#FAFAFE'>PhonePe Prediction</h1>",
             unsafe_allow_html=True)
 
 r1c1, r1c2, r1c3 = st.columns((1, 1, 4))
