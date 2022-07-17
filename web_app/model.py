@@ -1,42 +1,62 @@
 import pandas as pd
 import numpy as np
-
-df = pd.read_csv('./model.csv', parse_dates=['date'])
-df.set_index('date', inplace=True)
-
-pivot_date = df.index.min()
-max_id = df['state'].unique().max()
-states = df['state'].unique().tolist()
-
-count_reg_models = list(range(max_id+1))
-for state in states:
-    df_ = df[df['state'] == state]
-    reg_poly_coeffs = np.polyfit(df_["date_id"], df_["count"], 2)
-    reg_poly = np.poly1d(reg_poly_coeffs)
-    count_reg_models[state] = reg_poly
-
-amount_reg_models = list(range(max_id+1))
-
-for state in states:
-    df_ = df[df['state'] == state]
-    reg_poly_coeffs = np.polyfit(df_["date_id"], df_["amount"], 2)
-    reg_poly = np.poly1d(reg_poly_coeffs)
-    amount_reg_models[state] = reg_poly
+from joblib import dump, load
 
 
-registration_reg_models = list(range(max_id+1))
+def run_to_serialize():
 
-for state in states:
-    df_ = df[df['state'] == state]
-    reg_poly_coeffs = np.polyfit(df_["date_id"], df_["registeredUsers"], 1)
-    reg_poly = np.poly1d(reg_poly_coeffs)
-    registration_reg_models[state] = reg_poly
+    df = pd.read_csv('./model.csv', parse_dates=['date'])
+    df.set_index('date', inplace=True)
 
-kinds = {
-    1: count_reg_models,
-    2: amount_reg_models,
-    3: registration_reg_models
-}
+    pivot_date = df.index.min()
+    max_id = df['state'].unique().max()
+    states = df['state'].unique().tolist()
+
+    count_reg_models = list(range(max_id+1))
+    for state in states:
+        df_ = df[df['state'] == state]
+        reg_poly_coeffs = np.polyfit(df_["date_id"], df_["count"], 2)
+        reg_poly = np.poly1d(reg_poly_coeffs)
+        count_reg_models[state] = reg_poly
+
+    amount_reg_models = list(range(max_id+1))
+
+    for state in states:
+        df_ = df[df['state'] == state]
+        reg_poly_coeffs = np.polyfit(df_["date_id"], df_["amount"], 2)
+        reg_poly = np.poly1d(reg_poly_coeffs)
+        amount_reg_models[state] = reg_poly
+
+    registration_reg_models = list(range(max_id+1))
+
+    for state in states:
+        df_ = df[df['state'] == state]
+        reg_poly_coeffs = np.polyfit(df_["date_id"], df_["registeredUsers"], 1)
+        reg_poly = np.poly1d(reg_poly_coeffs)
+        registration_reg_models[state] = reg_poly
+
+    kinds = {
+        1: count_reg_models,
+        2: amount_reg_models,
+        3: registration_reg_models
+    }
+    return {'kinds': kinds, 'variables': [pivot_date, states]}
+
+
+kinds, pivot_date = [None]*2
+try:
+    data = load('model.joblib')
+    kinds = data['kinds']
+    pivot_date, states = data["variables"]
+except:
+    print("Model dump loading failed!")
+    print("Refitting Model!")
+    data = run_to_serialize()
+    kinds = data['kinds']
+    pivot_date, states = data["variables"]
+    print('Dumping Model!')
+    dump(data, 'model.joblib')
+
 
 predict_df = pd.DataFrame()
 predict_df['state'] = states
