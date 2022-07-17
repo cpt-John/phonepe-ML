@@ -13,7 +13,7 @@
   <p align="center">
     A machine learning project using sklearn package with EDA and interactive web-app
     <br />
-    <a href=""><strong><h2>Go to deployed web app »</h2></strong></a>
+    <a href="https://cpt-john-phonepe-ml-web-appstreamlit-ncep4v.streamlitapp.com/"><strong><h2>Go to deployed web app »</h2></strong></a>
     <br />
     <br />
   </p>
@@ -113,7 +113,7 @@ The web_app directory will contain a `model.joblib` file which is the pickled mo
    streamlit run streamlit.py
    ```
 
-### You can view the deployment on live server here <a href=""><strong>Go to web app »</strong></a>
+### You can view the deployment on live server here <a href="https://cpt-john-phonepe-ml-web-appstreamlit-ncep4v.streamlitapp.com/"><strong>Go to web app »</strong></a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
