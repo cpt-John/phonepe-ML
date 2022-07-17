@@ -9,7 +9,7 @@ max_id = df['state'].unique().max()
 states = df['state'].unique().tolist()
 
 count_reg_models = list(range(max_id+1))
-for state in range(max_id+1):
+for state in states:
     df_ = df[df['state'] == state]
     reg_poly_coeffs = np.polyfit(df_["date_id"], df_["count"], 2)
     reg_poly = np.poly1d(reg_poly_coeffs)
@@ -17,7 +17,7 @@ for state in range(max_id+1):
 
 amount_reg_models = list(range(max_id+1))
 
-for state in range(max_id+1):
+for state in states:
     df_ = df[df['state'] == state]
     reg_poly_coeffs = np.polyfit(df_["date_id"], df_["amount"], 2)
     reg_poly = np.poly1d(reg_poly_coeffs)
@@ -26,7 +26,7 @@ for state in range(max_id+1):
 
 registration_reg_models = list(range(max_id+1))
 
-for state in range(max_id+1):
+for state in states:
     df_ = df[df['state'] == state]
     reg_poly_coeffs = np.polyfit(df_["date_id"], df_["registeredUsers"], 1)
     reg_poly = np.poly1d(reg_poly_coeffs)
@@ -48,7 +48,7 @@ def predict(kind, date):
         "value": [],
         "state_code": []
     }
-    for state in range(max_id+1):
+    for state in states:
         value = kinds[kind][state](date_id)
         predict_df['state_code'].append(state)
         predict_df['value'].append(value)

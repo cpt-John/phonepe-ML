@@ -51,50 +51,50 @@ folium.Choropleth(
 geo_json = folium.features.GeoJson('states_india.geojson', name="LSOA Code",
                                    popup=folium.features.GeoJsonPopup(fields=['st_nm']))
 geo_json.add_to(m)
-r2c1, r2c2, = st.columns((1, 3))
+r2c1, r2c2, = st.columns((3, 1))
 
 map_vals = \
-    {0: 'Andaman and Nicobar',
-     1: 'Andhra Pradesh',
-     2: 'Arunachal Pradesh',
-     3: 'Assam',
-     4: 'Bihar',
-     5: 'Chandigarh',
-     6: 'Chhattisgarh',
-     7: 'Daman and Diu',
-     8: 'Delhi',
-     9: 'Goa',
-     10: 'Gujarat',
-     11: 'Haryana',
-     12: 'Himachal Pradesh',
-     13: 'Jammu and Kashmir',
-     14: 'Jharkhand',
-     15: 'Karnataka',
-     16: 'Kerala',
-     17: 'Ladakh',
-     18: 'Lakshadweep',
-     19: 'Madhya Pradesh',
-     20: 'Maharashtra',
-     21: 'Manipur',
-     22: 'Meghalaya',
-     23: 'Mizoram',
-     24: 'Nagaland',
-     25: 'Odisha',
-     26: 'Puducherry',
-     27: 'Punjab',
-     28: 'Rajasthan',
-     29: 'Sikkim',
-     30: 'Tamil Nadu',
-     31: 'Telangana',
-     32: 'Tripura',
-     33: 'Uttar Pradesh',
-     34: 'Uttarakhand',
-     35: 'West Bengal'}
+    {0: 'Telangana',
+     35: 'Andaman & Nicobar Island',
+     28: 'Andhra Pradesh',
+     12: 'Arunanchal Pradesh',
+     18: 'Assam',
+     10: 'Bihar',
+     22: 'Chhattisgarh',
+     25: 'Daman & Diu',
+     30: 'Goa',
+     24: 'Gujarat',
+     6: 'Haryana',
+     2: 'Himachal Pradesh',
+     1: 'Jammu & Kashmir',
+     20: 'Jharkhand',
+     29: 'Karnataka',
+     32: 'Kerala',
+     31: 'Lakshadweep',
+     23: 'Madhya Pradesh',
+     27: 'Maharashtra',
+     14: 'Manipur',
+     4: 'Chandigarh',
+     34: 'Puducherry',
+     3: 'Punjab',
+     8: 'Rajasthan',
+     11: 'Sikkim',
+     33: 'Tamil Nadu',
+     16: 'Tripura',
+     9: 'Uttar Pradesh',
+     5: 'Uttarakhand',
+     19: 'West Bengal',
+     21: 'Odisha',
+     26: 'Dadara & Nagar Havelli',
+     17: 'Meghalaya',
+     15: 'Mizoram',
+     13: 'Nagaland',
+     7: 'NCT of Delhi'}
 
-with r2c1:
+with r2c2:
     states_data['state'] = states_data.replace(
         {'state_code': map_vals})['state_code']
     states_data.drop("state_code", axis=1, inplace=True)
-    st.table(states_data)
-with r2c2:
-    folium_static(m, width=1600, height=950)
+    st.dataframe(states_data,)
+with r2c1:
+    folium_static(m, width=1200)
