@@ -7,7 +7,7 @@ from datetime import date, datetime
 
 
 st.set_page_config(layout="wide")
-json1 = f"states_india.geojson"
+geoJson = f"./streamlit_files/states_india.geojson"
 
 m = folium.Map(location=[23.47, 77.94], tiles='CartoDB positron', name="Light Map",
                zoom_start=5,
@@ -39,7 +39,7 @@ with r1c2:
 states_data = predict(option_map[selected_item], predict_date)
 
 folium.Choropleth(
-    geo_data=json1,
+    geo_data=geoJson,
     name="choropleth",
     data=states_data,
     columns=["state_code", "value"],
@@ -48,7 +48,7 @@ folium.Choropleth(
     fill_opacity=0.7,
     line_opacity=.1,
 ).add_to(m)
-geo_json = folium.features.GeoJson('states_india.geojson', name="LSOA Code",
+geo_json = folium.features.GeoJson(geoJson, name="LSOA Code",
                                    popup=folium.features.GeoJsonPopup(fields=['st_nm']))
 geo_json.add_to(m)
 r2c1, r2c2, = st.columns((3, 1))

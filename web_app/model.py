@@ -4,7 +4,7 @@ from joblib import dump, load
 
 
 def run_to_serialize():
-    file_path = "./model.csv"
+    file_path = "streamlit_files/model.csv"
     df = pd.read_csv(file_path, parse_dates=['date'])
     df.set_index('date', inplace=True)
 
