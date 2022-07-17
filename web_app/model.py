@@ -4,7 +4,7 @@ from joblib import dump, load
 
 
 def run_to_serialize():
-    file_path = "streamlit_files/model.csv"
+    file_path = "./streamlit_files/model.csv"
     df = pd.read_csv(file_path, parse_dates=['date'])
     df.set_index('date', inplace=True)
 
@@ -45,7 +45,7 @@ def run_to_serialize():
 
 kinds, pivot_date = [None]*2
 try:
-    data = load('model.joblib')
+    data = load('./streamlit_files/model.joblib')
     kinds = data['kinds']
     pivot_date, states = data["variables"]
 except:
@@ -55,7 +55,7 @@ except:
     kinds = data['kinds']
     pivot_date, states = data["variables"]
     print('Dumping Model!')
-    dump(data, 'model.joblib')
+    dump(data, './streamlit_files/model.joblib')
 
 
 predict_df = pd.DataFrame()
