@@ -11,7 +11,7 @@
   <h1 align="center">PhonePe Metrics</h1>
 
   <p align="center">
-    A machine learning project using sklearn package with EDA and interactive web-app
+    A machine learning project using pandas package with EDA and interactive web-app
     <br />
     <a href="https://cpt-john-phonepe-ml-web-appstreamlit-ncep4v.streamlitapp.com/"><strong><h2>Go to deployed web app »</h2></strong></a>
     <br />
