@@ -17,10 +17,17 @@ option_map = {"count": 1,
               "amount": 2,
               "registration": 3}
 st.markdown(
-    '<style>.block-container{background-color:#6739B7;} header{background-color:#C7C3FD !important}  label{color:#FAFAFE !important}</style>', unsafe_allow_html=True)
+    '<style>.block-container{background-color:#6739B7;padding-top: 2em;padding-bottom: 2em;} header{background-color:#C7C3FD !important}  label{color:#FAFAFE !important}</style>', unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; margin-top:0; padding:0; color:#FAFAFE'>PhonePe Prediction</h1>",
             unsafe_allow_html=True)
-
+st.markdown(" <p style='text-align: center'> This app predicts the data using regression model \
+| The data files can be found along with the source code \
+| There is also a EDA notebook included with the source</p>", unsafe_allow_html=True)
+st.markdown(
+    """<div style='display: flex;flex-direction: row;justify-content:center; color:#FAFAFE; background-color: #C7C3FD'><a href="https://github.com/cpt-John/phonepe-ML">\
+        Source Code</a><div style='padding-inline:0.5em'> | </div><a href="https://cpt-john.github.io/">Portfolio</a></div>
+    """, unsafe_allow_html=True
+)
 r1c1, r1c2, r1c3 = st.columns((1, 1, 4))
 with r1c1:
     predict_date = st.date_input(
@@ -95,6 +102,7 @@ with r2c2:
     states_data['state'] = states_data.replace(
         {'state_code': map_vals})['state_code']
     states_data.drop("state_code", axis=1, inplace=True)
+    st.write("Predicted Values")
     st.dataframe(states_data,)
 with r2c1:
     folium_static(m, width=1200)
